@@ -20,6 +20,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    @reservations = @board.reservations.sort_by{ |r| r.room }
   end
 
   def edit

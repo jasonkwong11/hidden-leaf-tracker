@@ -1,3 +1,10 @@
-<h1>Hi you found the Boards Index </h1>
+<div class="container" style="margin-left:30px; text-align: center">
+  <h1>Boards Index</h1>
 
-<%= link_to 'Create a new Board', new_board_path, class: 'btn btn-primary btn-lg' %>
+  <% @boards.each do |b| %>
+    <h3><%= link_to b.name, board_path(b) %></h3>
+  <% end%>
+
+  <%= link_to 'Create a new Board', new_board_path, class: 'btn btn-primary btn-lg' %>
+
+</div>

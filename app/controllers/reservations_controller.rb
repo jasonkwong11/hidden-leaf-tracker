@@ -25,11 +25,11 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:board_id])
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:board_id])
     if @reservation.update(reservation_params)
       flash[:notice] = "Reservation successfully edited!"
       redirect_to @reservation
@@ -40,9 +40,12 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:board_id])
     @reservation.destroy
-    redirect_to '/reservations'
+    flash[:notice] = "Reservation successfully deleted"
+     
+    @board = Board.find(params[:id])
+    redirect_to @board
   end
 end
 

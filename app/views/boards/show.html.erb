@@ -4,16 +4,42 @@
   <% end %>
 </div>
 
-<h1>Here's the <%= @board.name %> Board.</h1>
+<div class="container" style="margin-left:30px; text-align: center">
+  <h1>Here's the <%= @board.name %> Board.</h1>
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Res Id</th>
+          <th>Room</th>
+          <th>Guest</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>On Next Day Out</th>
+          <th>Vehicle</th>
+          <th>Notes</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <% @reservations.each do |r| %>
+        <tbody>
+          <tr>
+            <td><%= r.id %></td>
+            <td><%= r.room %></td>
+            <td><%= r.customer %></td>
+            <td><%= r.checkin %></td>
+            <td><%= r.checkout %></td>
+            <td><%= r.on_next_day %></td>
+            <td><%= r.vehicle %></td>
+            <td><%= r.notes %></td>
+            <td><%= link_to "Edit", edit_board_reservation_path(r), class: 'btn btn-primary btn-sm' %></td>
 
-<%= link_to 'Create a new Reservation', new_board_reservation_path(@board), class: 'btn btn-primary btn-lg' %>
-
-<% @board.reservations.each do |r| %>
-  <h3>Room: <%= r.room %></h3>
-  <li>Guest: <%= r.customer %></li>
-  <li>Checkin: <%= r.checkin %></li>
-  <li>Checkout: <%= r.checkout %></li>
-  <li>On Next Day: <%= r.on_next_day %></li>
-  <li>Vehicle: <%= r.vehicle %></li>
-  <li>Notes: <%= r.notes %></li>
-<% end %>
+            <td><%= link_to "Delete", board_reservation_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-primary btn-sm' %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+  <%= link_to 'Create a new Reservation', new_board_reservation_path(@board), class: 'btn btn-primary btn-lg' %>
+</div>
