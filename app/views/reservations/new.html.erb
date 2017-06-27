@@ -1,0 +1,46 @@
+<div class="reservation-form">
+  <div class="reservation-column">
+    <%= form_for(@reservation, url: board_reservations_path) do |f| %>
+      <h4 class="heading-title">
+        Create a New Reservation
+      </h4>
+      <div class="flash-message" style="color:blue;">
+        <% if flash[:notice] %>
+          <div class="notice"><%= flash[:notice] %></div>
+        <% end %>
+      </div>
+      <div class="reservation-form-container">
+        <div class="reservation-form__room">
+          <%= f.label :room, "Room" %>
+          <%= f.text_field :room %>
+        </div>
+        <div class="reservation-form__customer">
+          <%= f.label :customer, "Customer" %>
+          <%= f.text_field :customer %>
+        </div>
+        <div class="reservation-form__checkin">
+          <%= f.label :checkin, "Check-in" %>
+          <%= f.date_field :checkin %>
+        </div>
+        <div class="reservation-form__checkout">
+          <%= f.label :checkout, "Check-out" %>
+          <%= f.date_field :checkout %>
+        </div>
+        <div class="reservation-form__vehicle">
+          <%= f.label :vehicle, "Any Vehicle?" %>
+          <%= f.text_field :vehicle %>
+        </div>
+        <div class="reservation-form__notes">
+          <%= f.label :notes, "Notes" %>
+          <%= f.text_field :notes %>
+        </div>
+      </div>
+
+      <!-- create booking reservation buttons -->
+      <div class="reservation-form-container">
+        <div class="form-field">
+          <button type="submit" name="commit" class="button button--secondary">Create Booking reservation</button>
+        </div>
+      </div>
+    <% end %>
+</div>

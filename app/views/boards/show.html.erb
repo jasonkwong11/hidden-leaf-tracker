@@ -1,0 +1,19 @@
+<div class="flash-message" style="color:blue;">
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+</div>
+
+<h1>Here's the <%= @board.name %> Board.</h1>
+
+<%= link_to 'Create a new Reservation', new_board_reservation_path(@board), class: 'btn btn-primary btn-lg' %>
+
+<% @board.reservations.each do |r| %>
+  <h3>Room: <%= r.room %></h3>
+  <li>Guest: <%= r.customer %></li>
+  <li>Checkin: <%= r.checkin %></li>
+  <li>Checkout: <%= r.checkout %></li>
+  <li>On Next Day: <%= r.on_next_day %></li>
+  <li>Vehicle: <%= r.vehicle %></li>
+  <li>Notes: <%= r.notes %></li>
+<% end %>

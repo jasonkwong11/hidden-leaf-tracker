@@ -1,0 +1,25 @@
+<div class="board-form">
+  <div class="board-column">
+    <%= form_for(@board, url: boards_path) do |f| %>
+      <h4 class="heading-title">
+        Create a New Board
+      </h4>
+      <div class="flash-message" style="color:blue;">
+        <% if flash[:notice] %>
+          <div class="notice"><%= flash[:notice] %></div>
+        <% end %>
+      </div>
+      <div class="board-form-container">
+        <div class="board-form__board-name">
+          <%= f.label :name, "Board Name" %>
+          <%= f.text_field :name %>
+        </div>
+      </div>
+      <!-- create booking board buttons -->
+      <div class="board-form-container">
+        <div class="form-field">
+          <button type="submit" name="commit" class="button button--secondary">Create Board</button>
+        </div>
+      </div>
+    <% end %>
+</div>
