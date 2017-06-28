@@ -29,10 +29,11 @@ class ReservationsController < ApplicationController
   end
 
   def update
+    @board = Board.find(params[:id])
     @reservation = Reservation.find(params[:board_id])
     if @reservation.update(reservation_params)
       flash[:notice] = "Reservation successfully edited!"
-      redirect_to @reservation
+      redirect_to @board
     else
       flash[:notice] = "Please ensure all fields are filled in correctly"
       render 'edit'

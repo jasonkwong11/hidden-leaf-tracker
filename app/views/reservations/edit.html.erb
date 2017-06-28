@@ -1,8 +1,8 @@
 <div class="reservation-form" style="margin-left:30px; text-align: center">
   <div class="reservation-column">
-    <%= form_for(@reservation, url: board_reservations_path) do |f| %>
+    <%= form_for @reservation, :url => {:controller => "reservations", :action => "update" }, :method => "PATCH" do |f| %>
       <h4 class="heading-title">
-        Create a New Reservation
+        Edit a Reservation
       </h4>
       <div class="flash-message" style="color:blue;">
         <% if flash[:notice] %>
@@ -43,7 +43,7 @@
       <!-- create booking reservation buttons -->
       <div class="reservation-form-container">
         <div class="form-field">
-          <button type="submit" name="commit" class="button button--secondary">Create Booking reservation</button>
+          <button type="submit" name="commit" class="button button--secondary">Edit Reservation</button>
         </div>
       </div>
     <% end %>
