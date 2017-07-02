@@ -1,9 +1,9 @@
 <div class="board-form" style="margin-left:30px; text-align: center">
   <div class="board-column">
     <%= form_for(@board, url: boards_path) do |f| %>
-      <h4 class="heading-title">
+      <h1 class="heading-title">
         Create a New Board
-      </h4>
+      </h1>
       <div class="flash-message" style="color:blue;">
         <% if flash[:notice] %>
           <div class="notice"><%= flash[:notice] %></div>
@@ -18,8 +18,9 @@
       <!-- create booking board buttons -->
       <div class="board-form-container">
         <div class="form-field">
-          <button type="submit" name="commit" class="button button--secondary">Create Board</button>
+          <button type="submit" name="commit" class="btn btn-primary btn-lg">Create Board</button>
         </div>
+        <%= link_to 'Back to All Boards', :root, class: 'btn btn-primary btn-md' %>
       </div>
     <% end %>
 </div>
