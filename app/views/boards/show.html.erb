@@ -5,7 +5,7 @@
 </div>
 
 <div class="container" style="margin-left:30px; text-align: center">
-  <h1>Here's the <%= @board.name %> Board.</h1>
+  <h1>Here's the <%= @board.name %> Board</h1>
   <div class="container">
     <table class="table table-bordered">
       <thead>
@@ -44,4 +44,5 @@
   <%= link_to 'Create a new Reservation', new_board_reservation_path(@board), class: 'btn btn-primary btn-lg' %>
 
   <%= link_to 'Back to All Boards', :root, class: 'btn btn-primary btn-lg' %>
+  <%= link_to "Delete Old Reservations", delete_old_path(@board), method: :get, data: {confirm: "Are you sure?"}, class: 'btn btn-primary btn-lg' %>
 </div>

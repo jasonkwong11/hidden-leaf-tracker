@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/login', to: 'boards#redirect'
   get '/callback', to: 'boards#callback'
   get '/emails', to: 'boards#emails'
+  get '/delete_old', to: 'boards#delete_old'
 end

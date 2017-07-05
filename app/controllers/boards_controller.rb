@@ -1,4 +1,5 @@
 require 'dotenv'
+require 'date'
 
 class BoardsController < ApplicationController
   def index
@@ -22,7 +23,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
-    @reservations = @board.reservations.sort_by{ |r| r.room }
+    @reservations = @board.reservations.sort_by{ |r| [r.room, r.checkout] }
   end
 
   def edit
@@ -44,6 +45,13 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @board.destroy
     redirect_to '/boards'
+  end
+
+  def delete_old
+    @board = Board.find(params[:format])
+    @board.reservations.each {|r| r.destroy if r.checkout < Date.today}
+    @board.save
+    redirect_to @board
   end
 
   def redirect
@@ -90,37 +98,34 @@ class BoardsController < ApplicationController
 
     id_array.each do |id|
       @message = service.get_user_message('me', id)
+
+      email_array = @message.payload.parts[0].body.data.split("\r\n").delete_if {|x| x == "" }
+
+      customer_index = 3
+      checkin_index = email_array.index("Check-in") + 1
+      checkout_index = email_array.index("Checkout") + 1
+      room_index = (email_array.index("-"*71)) + 1
+
       reservation_hash = {
-        customer: @message.payload.parts[0].body.data.split("\r\n")[4],
-        room: @message.payload.parts[0].body.data.split("\r\n")[14],
-
-        #convert below to Date
-        #instead of hard-coding the exact index, make it more
-        #flexible by finding the "Check-in" element then
-        #checkin is that index + 1.
-        #checkout is checkin + 3
-        
-        checkin: @message.payload.parts[0].body.data.split("\r\n")[19],
-        checkout: @message.payload.parts[0].body.data.split("\r\n")[22]
+        customer: email_array[customer_index],
+        room: email_array[room_index],
+        checkin: Date.parse(email_array[checkin_index]),
+        checkout: Date.parse(email_array[checkout_index])
       }
+      tacoma_board = Board.find_by(name: "Tacoma")
+      seatac_board = Board.find_by(name: "SeaTac")
 
-      reservation = Reservation.find_or_initialize_by(reservation_hash)
-      
-      require 'pry'
-      binding.pry
+      if reservation_hash[:room].include?("Tacoma")
+        reservation_hash[:room] = reservation_hash[:room][-2..-1]
+        tacoma_board.reservations.find_or_create_by(reservation_hash)
+      end
 
-      reservation.save
+      if reservation_hash[:room].include?("Airport")
+        reservation_hash[:room] = reservation_hash[:room][-1]
+        seatac_board.reservations.find_or_create_by(reservation_hash)
+      end
     end
-
     redirect_to '/'
-    #iterate through threads, collecting the IDs in an array
-
-    #iterate through the ids_array. for each array, make a call to the get_user_message API
-    #take the message object and assign the parts needed for a reservation to a reservation_hash
-    #use the reservation_hash to mass assign a new reservation object
-      #...(use the pattern from auction-edge-test as an example)
-      #...e.g: use: find_or_initialize
-
   end
 end
 
