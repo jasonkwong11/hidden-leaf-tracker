@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :boards, only: [:show, :index, :new, :create] do
     resources :reservations
   end
+  get '/login', to: 'boards#redirect'
+  get '/callback', to: 'boards#callback'
+  get '/emails', to: 'boards#emails'
 end
