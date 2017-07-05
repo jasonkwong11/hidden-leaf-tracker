@@ -93,7 +93,7 @@ class BoardsController < ApplicationController
 
     service.authorization = access_token
 
-    @threads = service.list_user_threads('me', q: 'from:express@airbnb.com  subject:"reservation confirmed" new booking', max_results: 9999)
+    @threads = service.list_user_threads('me', q: 'from:express@airbnb.com  subject:"reservation confirmed" new booking', max_results: 25)
     id_array = @threads.threads.map {|t| t.id}
 
     id_array.each do |id|
