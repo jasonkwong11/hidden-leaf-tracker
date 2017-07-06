@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'dotenv'
 gem 'google-api-client', '~> 0.9', require: 'google/apis/gmail_v1'
 gem "omniauth-google-oauth2"
 gem 'omniauth'
@@ -51,6 +50,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'dotenv-rails'
 end
 
 group :development do
