@@ -15,7 +15,6 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Res Id</th>
             <th>Room</th>
             <th>Guest</th>
             <th>Check-in</th>
@@ -30,7 +29,6 @@
         <% @reservations.each do |r| %>
           <tbody>
             <tr>
-              <td><%= r.id %></td>
               <td><%= r.room %></td>
               <td><%= r.customer %></td>
               <td><%= r.checkin.mon %>/<%= r.checkin.mday %></td>
