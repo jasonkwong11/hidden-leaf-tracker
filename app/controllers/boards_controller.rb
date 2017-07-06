@@ -93,7 +93,7 @@ class BoardsController < ApplicationController
 
     service.authorization = access_token
 
-    @threads = service.list_user_threads('me', q: 'from:express@airbnb.com  subject:"reservation confirmed" new booking', max_results: 25)
+    @threads = service.list_user_threads('me', q: 'from:express@airbnb.com  subject:"reservation confirmed" new booking', max_results: 35)
     id_array = @threads.threads.map {|t| t.id}
 
     id_array.each do |id|
@@ -112,8 +112,8 @@ class BoardsController < ApplicationController
         checkin: Date.parse(email_array[checkin_index]),
         checkout: Date.parse(email_array[checkout_index])
       }
-      tacoma_board = Board.find_by(name: "Tacoma")
-      seatac_board = Board.find_by(name: "SeaTac")
+      tacoma_board = Board.find_or_create_by(name: "Tacoma")
+      seatac_board = Board.find_or_create_by(name: "SeaTac")
 
       if reservation_hash[:room].include?("Tacoma")
         reservation_hash[:room] = reservation_hash[:room][-2..-1]
