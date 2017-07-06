@@ -117,12 +117,12 @@ class BoardsController < ApplicationController
 
       if reservation_hash[:room].include?("Tacoma")
         reservation_hash[:room] = reservation_hash[:room][-2..-1]
-        tacoma_board.reservations.find_or_create_by(reservation_hash)
+        tacoma_board.reservations.find_or_create_by(reservation_hash) if reservation_hash[:checkout] >= Date.today
       end
 
       if reservation_hash[:room].include?("Airport")
         reservation_hash[:room] = reservation_hash[:room][-1]
-        seatac_board.reservations.find_or_create_by(reservation_hash)
+        seatac_board.reservations.find_or_create_by(reservation_hash) if reservation_hash[:checkout] >= Date.today
       end
     end
     redirect_to '/'
