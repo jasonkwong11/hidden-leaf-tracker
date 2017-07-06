@@ -8,6 +8,8 @@ end
 gem 'dotenv'
 gem 'google-api-client', '~> 0.9', require: 'google/apis/gmail_v1'
 gem "omniauth-google-oauth2"
+gem 'omniauth'
+gem 'json'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
