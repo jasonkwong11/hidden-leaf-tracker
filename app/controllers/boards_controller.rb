@@ -72,7 +72,7 @@ class BoardsController < ApplicationController
       client_id: "798648261019-05deia4vsv5l4ul9branekbeuapkp6vl.apps.googleusercontent.com",
       client_secret: "Jk3Im7WmB0iPk-xrR1rHXbpU",
       token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-      redirect_uri: url_for(:action => :callback),
+      redirect_uri: url_for(:action => :callback) || window.location.origin || window.location.protocol + '//' + window.location.host + '/' + oauth2callback,
       code: params[:code]
     })
 
