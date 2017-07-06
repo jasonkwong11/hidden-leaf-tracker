@@ -1,4 +1,3 @@
-require 'dotenv'
 require 'date'
 require 'google/api_client/client_secrets'
 
@@ -58,8 +57,8 @@ class BoardsController < ApplicationController
   def redirect
 
     client = Signet::OAuth2::Client.new({
-      client_id: ENV["GOOGLE_ID"],
-      client_secret: ENV["GOOGLE_SECRET"],
+      client_id: "798648261019-j5bcc051gmmq2556kdiddfjhlmsi9s0s.apps.googleusercontent.com",
+      client_secret: "Td7Zmj9RtU9qlwjAu3jz5t92",
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       scope: Google::Apis::GmailV1::AUTH_GMAIL_READONLY,
       redirect_uri: url_for(:action => :callback)
@@ -70,8 +69,8 @@ class BoardsController < ApplicationController
 
   def callback
     client = Signet::OAuth2::Client.new({
-      client_id: ENV["GOOGLE_ID"],
-      client_secret: ENV["GOOGLE_SECRET"],
+      client_id: "798648261019-j5bcc051gmmq2556kdiddfjhlmsi9s0s.apps.googleusercontent.com",
+      client_secret: "Td7Zmj9RtU9qlwjAu3jz5t92",
       token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
       redirect_uri: url_for(:action => :callback),
       code: params[:code]
