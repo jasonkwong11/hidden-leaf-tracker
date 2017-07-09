@@ -118,7 +118,7 @@ class BoardsController < ApplicationController
 
       if reservation_hash[:room].include?("Tacoma")
         reservation_hash[:room] = reservation_hash[:room][-2..-1]
-        tacoma_board.reserva1tions.find_or_create_by(reservation_hash) if reservation_hash[:checkout] >= Date.today && !Reservation.find_by(customer: reservation_hash[:customer])
+        tacoma_board.reservations.find_or_create_by(reservation_hash) if reservation_hash[:checkout] >= Date.today && !Reservation.find_by(customer: reservation_hash[:customer])
       end
 
       if reservation_hash[:room].include?("Airport")
