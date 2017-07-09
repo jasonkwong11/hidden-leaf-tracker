@@ -19,7 +19,6 @@
             <th>Guest</th>
             <th>Check-in</th>
             <th>Check-out</th>
-            <th>On Next Day Out</th>
             <th>Vehicle</th>
             <th>Notes</th>
             <th>Edit</th>
@@ -33,7 +32,6 @@
               <td><%= r.customer %></td>
               <td><%= r.checkin.mon %>/<%= r.checkin.mday %></td>
               <td><%= r.checkout.mon %>/<%= r.checkout.mday %></td>
-              <td><%= r.on_next_day %></td>
               <td><%= r.vehicle %></td>
               <td><%= r.notes %></td>
               <td><%= link_to "Edit", edit_board_reservation_path(r), class: 'btn btn-primary btn-sm' %></td>
