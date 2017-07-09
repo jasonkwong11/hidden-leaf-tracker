@@ -27,17 +27,21 @@
         </thead>
         <% @reservations.each do |r| %>
           <tbody>
-            <tr>
-              <td><%= r.room %></td>
-              <td><%= r.customer %></td>
-              <td><%= r.checkin.mon %>/<%= r.checkin.mday %></td>
-              <td><%= r.checkout.mon %>/<%= r.checkout.mday %></td>
-              <td><%= r.vehicle %></td>
-              <td><%= r.notes %></td>
-              <td><%= link_to "Edit", edit_board_reservation_path(r), class: 'btn btn-primary btn-sm' %></td>
+            <% if r.days_stayed >= 30 %>
+              <tr bgcolor="#5D9732">
+            <% else %>
+              <tr bgcolor="#fd5c63">
+            <% end %>
+                <td><%= r.room %></td>
+                <td><%= r.customer %></td>
+                <td><%= r.checkin.mon %>/<%= r.checkin.mday %></td>
+                <td><%= r.checkout.mon %>/<%= r.checkout.mday %></td>
+                <td><%= r.vehicle %></td>
+                <td><%= r.notes %></td>
+                <td><%= link_to "Edit", edit_board_reservation_path(r), class: 'btn btn-primary btn-sm' %></td>
 
-              <td><%= link_to "Delete", board_reservation_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-primary btn-sm' %></td>
-            </tr>
+                <td><%= link_to "Delete", board_reservation_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-primary btn-sm' %></td>
+              </tr>
           </tbody>
         <% end %>
       </table>
