@@ -122,7 +122,7 @@ class BoardsController < ApplicationController
       end
 
       if reservation_hash[:room].include?("Airport")
-        reservation_hash[:room] = reservation_hash[:room][-1]
+        reservation_hash[:room] = reservation_hash[:room][-2]
         seatac_board.reservations.find_or_create_by(reservation_hash) if reservation_hash[:checkout] >= Date.today
       end
     end
